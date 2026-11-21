@@ -15,7 +15,7 @@ Four parts are added up, to a maximum of 100. The app shows every part with its 
 | Weather | 0 to 30 | What have rain and flooding on its grid cell left behind? |
 | Reports | 0 to 20 | Is there an open complaint? |
 
-Low is under 40, Medium is 40 to 59, High is 60 or more.
+Routine is under 40, This week is 40 to 59, Inspect first is 60 or more. These three names are used everywhere: code, API, database and UI.
 
 ## The three asset types
 
@@ -79,7 +79,13 @@ Profile does not change. An asset that holds water by its nature keeps those poi
 | Light or moderate rain | None now | None | None now |
 | Heavy storm | None now: it was flushed | Check the overflow | Check trays, mounts and cables |
 | Flood | Inspect once the water has receded | The same | The same. Damaged cables are reported, never handled |
-| Days pass | A follow-up when water has stood 7 days or the level reaches High | When the level reaches High | The same as a garden |
+| Days pass | A follow-up when water has stood 7 days or the level reaches Inspect first | When the level reaches Inspect first | The same as a garden |
+
+Tasks on solar systems (trays, mounts, cables) and any repair of broken parts are created with `needs_skills: true`, so only residents with the matching skill can claim them. Everyone can still report.
+
+## Overdue tasks do not change the score
+
+A task nobody claims for 2 days becomes overdue. That moves it to the top of the task list and alerts the Admin, but it adds no points. The score only reflects the asset's condition; the time since the last inspection is already counted in the inspection part.
 
 ## One storm, three assets
 
@@ -87,9 +93,9 @@ A heavy storm on day 0, with showers on days 2 and 5, so nothing dries out. Nobo
 
 | Asset | Day before | Storm day | Day 4 | Day 7 |
 |---|---|---|---|---|
-| Garden, poor drainage, last inspected 8 days before, water standing 4 days | 52 Medium | **36 Low**: flushed | 52 Medium: water is back | 71 High: follow-up task |
-| Pond, still water, inspected 2 days before | 20 Low | 40 Medium: overflow check, task | 50 Medium | 60 High |
-| Solar system with trays, inspected 10 days before | 14 Low | 32 Low: trays filled, task | 40 Medium | 54 Medium |
+| Garden, poor drainage, last inspected 8 days before, water standing 4 days | 52 This week | **36 Routine**: flushed | 52 This week: water is back | 71 Inspect first: follow-up task |
+| Pond, still water, inspected 2 days before | 20 Routine | 40 This week: overflow check, task | 50 This week | 60 Inspect first |
+| Solar system with trays, inspected 10 days before | 14 Routine | 32 Routine: trays filled, task | 40 This week | 54 This week |
 
 Same storm, opposite first effects. That is the point the model has to keep.
 
