@@ -1,0 +1,74 @@
+{
+ "datasetId": "d_14d807e20158338fd578c2913953516e",
+ "createdAt": "2019-12-11T00:00:00+08:00",
+ "name": "Park Facilities",
+ "collectionIds": [
+  "1495"
+ ],
+ "description": "This dataset contains the representative location of facilities in Parks which are under the purview of the National Parks Board.\r\n",
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2026-11-21T10:06:45+08:00",
+ "managedBy": "National Parks Board",
+ "coverageStart": "2025-11-07T00:00:00+08:00",
+ "datasetSize": 6091834,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "OBJECTID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "UNIQUEID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "NAME",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "CLASS",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "ADDITIONAL_INFO",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "INC_CRC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "FMEL_UPD_D",
+    "description": ""
+   }
+  ]
+ }
+}

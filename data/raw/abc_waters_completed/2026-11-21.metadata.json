@@ -1,0 +1,82 @@
+{
+ "datasetId": "d_b5f239cc954bb7920245a7b8ad95dde8",
+ "createdAt": "2023-07-31T15:14:37+08:00",
+ "name": "ABC Waters Completed",
+ "collectionIds": [
+  "2014"
+ ],
+ "description": "The ABC Waters Project Completed layer represents the boundary of all the completed ABC Waters Projects around Singapore.",
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2026-11-21T10:06:43+08:00",
+ "managedBy": "PUB, Singapore's national water agency",
+ "coverageStart": "2025-11-07T00:00:00+08:00",
+ "datasetSize": 348489,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "OBJECTID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "PUB_WEBSITE_HYPERLINK",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "PROJECT_TITLE",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "PROJECT_DESC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "INC_CRC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "FMEL_UPD_D",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.AREA",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.LEN",
+    "description": ""
+   }
+  ]
+ }
+}

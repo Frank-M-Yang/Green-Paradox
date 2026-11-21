@@ -1,0 +1,42 @@
+{
+  "_about": [
+    "SIMULATED ASSETS. Nothing in this file describes a real object.",
+    "Open data has no register of small items such as planters, pot trays and rain barrels, so these stand in for them.",
+    "Positions were placed by hand near real roads and gardens so the map looks plausible. They are illustrative only.",
+    "The site marks every one of these as SIMULATED wherever it appears.",
+    "Fields: id, name, type (a key of [asset_types] in config/risk_config.toml), lon, lat.",
+    "Optional: holds_water, drain_time_h, water_source, flushable to override the type's assumption for one asset; note."
+  ],
+  "assets": [
+    {"id": "sim-drain-1", "name": "Roadside drain A", "type": "storm_drain", "lon": 103.83795, "lat": 1.38050,
+     "note": "Low section that holds water behind leaf litter."},
+    {"id": "sim-drain-2", "name": "Roadside drain B", "type": "storm_drain", "lon": 103.82862, "lat": 1.37793},
+    {"id": "sim-drain-3", "name": "Roadside drain C", "type": "storm_drain", "lon": 103.84155, "lat": 1.38753},
+    {"id": "sim-drain-4", "name": "Roadside drain D", "type": "storm_drain", "lon": 103.83292, "lat": 1.37375},
+    {"id": "sim-drain-5", "name": "Roadside drain E", "type": "storm_drain", "lon": 103.84443, "lat": 1.37952},
+    {"id": "sim-drain-6", "name": "Roadside drain F", "type": "storm_drain", "lon": 103.82867, "lat": 1.36973,
+     "drain_time_h": 12, "note": "Regraded channel. Runs dry within hours of rain."},
+
+    {"id": "sim-tray-1", "name": "Pot tray A", "type": "pot_tray", "lon": 103.83872, "lat": 1.37982,
+     "note": "Deep saucer under a large pot. This is the object with the demo QR sticker."},
+    {"id": "sim-tray-2", "name": "Pot tray B", "type": "pot_tray", "lon": 103.83706, "lat": 1.37037},
+    {"id": "sim-tray-3", "name": "Pot tray C", "type": "pot_tray", "lon": 103.83934, "lat": 1.38114,
+     "note": "Tray is fixed to its stand and cannot be tipped out."},
+    {"id": "sim-tray-4", "name": "Pot tray D", "type": "pot_tray", "lon": 103.82913, "lat": 1.37560},
+
+    {"id": "sim-planter-1", "name": "Planter box A", "type": "planter_box", "lon": 103.83629, "lat": 1.37441},
+    {"id": "sim-planter-2", "name": "Planter box B", "type": "planter_box", "lon": 103.84186, "lat": 1.38024},
+    {"id": "sim-planter-3", "name": "Planter box C", "type": "planter_box", "lon": 103.84202, "lat": 1.37397,
+     "holds_water": false, "note": "Raised planter with open weep holes and no saucer. Drains freely."},
+    {"id": "sim-planter-4", "name": "Planter box D", "type": "planter_box", "lon": 103.83239, "lat": 1.37874},
+
+    {"id": "sim-barrel-1", "name": "Rain barrel A", "type": "rain_barrel", "lon": 103.84145, "lat": 1.37358,
+     "note": "Open-topped barrel collecting roof runoff."},
+    {"id": "sim-barrel-2", "name": "Rain barrel B", "type": "rain_barrel", "lon": 103.83719, "lat": 1.37307,
+     "note": "Fitted lid with fine mesh over the inlet."},
+    {"id": "sim-barrel-3", "name": "Rain barrel C", "type": "rain_barrel", "lon": 103.83951, "lat": 1.37769},
+
+    {"id": "sim-roof-1", "name": "Roof garden A", "type": "roof_garden", "lon": 103.83910, "lat": 1.37662},
+    {"id": "sim-roof-2", "name": "Roof garden B", "type": "roof_garden", "lon": 103.84386, "lat": 1.37101}
+  ]
+}

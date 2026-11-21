@@ -1,0 +1,82 @@
+{
+ "datasetId": "d_5d060d8b7838a15e8906fb22c50dbf51",
+ "createdAt": "2019-07-25T00:00:00+08:00",
+ "name": "Areas with High Aedes Population (GEOJSON)",
+ "collectionIds": [
+  "1431"
+ ],
+ "description": "Areas where Gravitraps deployed by NEA detected relatively higherÃÂ Aedes aegyptiÃÂ mosquito populations, from April to June 2019. ",
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2026-11-05T10:06:44+08:00",
+ "managedBy": "National Environment Agency",
+ "coverageStart": "2025-10-23T00:00:00+08:00",
+ "datasetSize": 358397,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "OBJECTID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "DESCRIPTION",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "NAME",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "HYPERLINK",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "INC_CRC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "FMEL_UPD_D",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.AREA",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.LEN",
+    "description": ""
+   }
+  ]
+ }
+}

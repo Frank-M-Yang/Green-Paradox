@@ -1,0 +1,61 @@
+# Canopy Care: what the demo shows. Risk thresholds are NOT here; see risk_config.toml.
+
+[neighbourhood]
+name = "Ang Mo Kio west"
+# URA Master Plan 2019 subzones that make up the demo area. Assets are registered inside these.
+subzones = ["KEBUN BAHRU", "YIO CHU KANG WEST", "SEMBAWANG HILLS"]
+# Extra map shown around the area, in metres, so that clusters next door stay visible.
+map_margin_m = 700
+
+[display]
+# Community garden names come from the NParks list and are names of organisations
+# (residents' committees, schools, charities). Set to false to show "Community garden 675"
+# and so on, if you would rather not put organisation names on a projector.
+show_garden_names = false
+
+[history]
+# Inspection history is simulated. The same seed always gives the same made-up history.
+seed = "canopy-demo-1"
+
+[tasks]
+# How many inspections fit on the printed daily sheet.
+daily_capacity = 10
+
+[site]
+# Address phones will use to reach the site, ending in "/". Leave empty and the QR pages
+# use whatever address they are opened from, which is right in almost every case.
+# Example: "https://example.org/canopy-care/"
+public_url = ""
+
+# ----------------------------------------------------------------------------
+# Scenarios for the presenter. Every scenario replays REAL rainfall measured at
+# the same stations, over 14 complete days. Nothing here is invented rain.
+# Only the rainfall changes between scenarios: the assets, the inspection
+# history and the dengue layers stay as they are in the snapshot.
+#
+#   end_date = ""            the 14 days before the snapshot date
+#   end_date = "YYYY-MM-DD"  the 14 days ending on that date
+# ----------------------------------------------------------------------------
+[[scenarios]]
+id = "real"
+label = "Real: last 14 days"
+end_date = ""
+summary = "The rain that actually fell in the 14 days before the snapshot."
+
+[[scenarios]]
+id = "light"
+label = "Light to moderate rain"
+end_date = "2025-08-19"
+summary = "Showers on most days, none strong enough to count as a flush. Still water builds up wherever rain collects."
+
+[[scenarios]]
+id = "heavy"
+label = "Heavy rain"
+end_date = "2026-11-17"
+summary = "A heavy storm two days before. Drains are flushed and score 0 for now; containers have been filled."
+
+[[scenarios]]
+id = "dry"
+label = "Dry spell"
+end_date = "2026-01-31"
+summary = "Almost no rain for two weeks. Rain-fed assets have dried out; water that people pour or store is what remains."

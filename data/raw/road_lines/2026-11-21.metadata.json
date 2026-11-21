@@ -1,0 +1,58 @@
+{
+ "datasetId": "d_95a29fbb10cf94a3c263d33861d7b6c6",
+ "createdAt": "2023-07-03T14:58:28+08:00",
+ "name": "Master Plan 2019 Road Graphic layer",
+ "collectionIds": [
+  "1649"
+ ],
+ "description": "Indicative line of road kerb or road divider layer. This layer is extracted from the Master Plan 2019 that was approved on 18 Nov 2019. For the latest Master Plan, please visit URA web site at https://www.ura.gov.sg/",
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2025-12-05T10:07:06+08:00",
+ "managedBy": "Urban Redevelopment Authority",
+ "coverageStart": "2019-12-09T00:00:00+08:00",
+ "datasetSize": 5916059,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "OBJECTID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "TYPE",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "INC_CRC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "FMEL_UPD_D",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.LEN",
+    "description": ""
+   }
+  ]
+ }
+}

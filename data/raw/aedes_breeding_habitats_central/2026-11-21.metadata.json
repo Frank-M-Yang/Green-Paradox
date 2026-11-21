@@ -1,0 +1,32 @@
+{
+ "datasetId": "d_68d66612ee0b79bb49bf63730134aa68",
+ "createdAt": "2019-01-23T00:00:00+08:00",
+ "name": "Aedes Mosquito Breeding Habitats - Central (GEOJSON)",
+ "collectionIds": [
+  "1425"
+ ],
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2024-06-06T14:40:31+08:00",
+ "managedBy": "National Environment Agency",
+ "datasetSize": 86392,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "Name",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "Description",
+    "description": ""
+   }
+  ]
+ }
+}

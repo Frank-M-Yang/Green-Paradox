@@ -1,0 +1,269 @@
+# Canopy Care: how the inspection priority score is calculated
+#
+# ============================================================================
+#  EVERY NUMBER IN THIS FILE IS A PLACEHOLDER.
+#  None has been validated against field data. They are starting values chosen
+#  so the calculation is easy to follow, and they need review by people who
+#  know vector control and drainage before any real use.
+# ============================================================================
+#
+# What the score is: a way to decide which asset to inspect first.
+# What it is not: a prediction of dengue cases, mosquito numbers or outbreaks.
+#
+# The score is the sum of four parts, each explained on screen for every asset:
+#
+#   1. water       how long the asset holds water once it is wet     0 to 25
+#   2. inspection  how long since someone last looked                0 to 35
+#   3. rain        estimated standing water from recent rainfall     0 to 25
+#   4. location    inside a dengue cluster or high-Aedes area        0 to 15
+#
+# The data script reads this file once a day. The site reads the same values
+# from the snapshot the script writes, so this is the only place to change them.
+
+[life_cycle]
+# Aedes egg-to-adult development in warm weather takes roughly a week.
+# Singapore is warm all year, so one value is used and temperature is not an input.
+days = 7
+
+[bands]
+# A score at or above "high" is shown as "Inspect first".
+# A score at or above "medium" is shown as "Inspect this week". Lower is "Routine".
+high = 60
+medium = 40
+
+# ----------------------------------------------------------------------------
+# Part 1: water. Taken from the asset's estimated drain time in hours.
+# No real dataset records drain time, so it is an assumption per asset type
+# (see [asset_types] below) unless a simulated asset sets its own value.
+# ----------------------------------------------------------------------------
+[water]
+points_if_no_water = 0             # asset is not expected to hold water
+points_drains_within_1_day = 5     # under 24 hours
+points_drains_within_3_days = 12   # 24 to under 72 hours
+points_drains_within_7_days = 18   # 72 to under 168 hours: shorter than one life cycle
+points_holds_7_days_or_more = 25   # one life cycle or longer, including permanent water
+
+# ----------------------------------------------------------------------------
+# Part 2: inspection. Days since the last recorded inspection, compared with
+# the life cycle above: about half a cycle, one cycle, two cycles.
+# ----------------------------------------------------------------------------
+[inspection]
+recent_up_to_days = 3              # inspected within about half a life cycle
+points_recent = 0
+due_up_to_days = 7                 # within one life cycle
+points_due = 10
+overdue_up_to_days = 14            # within two life cycles
+points_overdue = 25
+points_long_overdue = 35           # more than two life cycles ago
+points_never = 35                  # no inspection on record
+
+# If the last inspection found standing water and nothing was done to remove it
+# (for example it was only reported), the asset stays at this level until someone returns.
+points_follow_up = 25
+
+# If the last inspection found larvae, the day limits above are multiplied by this,
+# so the asset comes due again sooner. 0.5 turns 3 / 7 / 14 days into 1.5 / 3.5 / 7.
+day_limits_factor_after_larvae = 0.5
+
+# Dashboard only: an asset is "inspected on time" if its last inspection is this recent.
+on_time_days = 7
+
+# ----------------------------------------------------------------------------
+# Part 3: rain. A day-by-day estimate, for the last `lookback_days` complete
+# days at the nearest rainfall station, of how long water has been standing in
+# the asset without being disturbed.
+#
+# More rain does not simply mean a higher score. Three cases are kept apart:
+#
+#   a. Light or moderate rain leaves still water. Each day of at least
+#      `wetting_rain_mm` wets the asset, and the water stays for the asset's
+#      drain time after the LAST such day. Rain that arrives before the asset
+#      has drained tops it up, so the clock keeps running: it counts unbroken
+#      days of standing water since the asset was last dry, flushed or left
+#      clear by an inspection. It does not count days since the latest shower.
+#      Example: a drain that empties in 4 days, wet on the 16th and rained on
+#      again on the 17th, 18th and 19th, has held water for 5 days on the 21st.
+#   b. Heavy rain flushes. For assets marked flushable (drains), a storm of at
+#      least `flush_hour_mm` in 60 minutes or `flush_day_mm` in a day restarts
+#      the clock, and the asset scores 0 for `flush_relief_days` afterwards.
+#      Containers are not flushable: heavy rain fills them.
+#   c. After the rain stops, the water keeps standing until the drain time has
+#      passed. Then the asset is treated as dry and scores 0.
+#
+# Why a flush lowers the score: Seidahmed and Eltahir (2016, PLoS Negl Trop Dis
+# 10(7): e0004842) followed breeding sites in Geylang for a year and saw most
+# Aedes aegypti breeding in storm drains disappear after the intense storms of
+# the wet monsoon phase. Benedum et al. (2018, PLoS Negl Trop Dis 12(12):
+# e0006935) found a lower risk of dengue outbreaks one to six weeks after
+# flushing events in Singapore.
+#
+# Why the flush limits below are only placeholders: neither paper gives a single
+# rainfall cut-off. The first says a flushing threshold still has to be
+# determined and probably depends on the local drainage network. The second
+# predicts flushing from many rainfall measures over the preceding weeks. The
+# values here are set high and the relief short on purpose, so that when in
+# doubt the score keeps a drain on the list.
+# ----------------------------------------------------------------------------
+[rain]
+lookback_days = 14
+wetting_rain_mm = 1.0              # daily total that leaves water in a water-holding asset
+flush_hour_mm = 30.0               # heaviest 60 minutes of the day at or above this: a flushing storm
+flush_day_mm = 50.0                # or daily total at or above this
+flush_relief_days = 3              # days after a flush during which a flushable asset scores 0
+min_day_coverage = 0.8             # share of 5-minute readings a day needs before it is trusted
+
+fresh_up_to_days = 2               # water standing 1 to 2 days
+points_fresh = 8
+several_up_to_days = 6             # water standing 3 to 6 days
+points_several_days = 16
+points_full_cycle = 25             # water standing 7 days or more: a full life cycle
+points_dry = 0                     # no water expected
+points_flushed = 0                 # flushed within the relief period
+
+# Assets that hold water whatever the weather (watered by hand, or stored water) get
+# this fixed value. How long their water has stood is unknown without an inspection,
+# and part 2 already measures that.
+points_not_rain_fed = 10
+
+# ----------------------------------------------------------------------------
+# Part 4: location. Uses the NEA dengue cluster and high-Aedes area polygons as
+# published. An asset is inside a polygon or it is not: the sources give no
+# finer measure. "Near" is a straight-line distance to the cluster's edge.
+# ----------------------------------------------------------------------------
+[location]
+points_in_dengue_cluster = 10
+points_near_dengue_cluster = 5
+near_cluster_m = 150
+points_in_high_aedes_area = 5
+
+# ----------------------------------------------------------------------------
+# Assumptions per asset type. These are NOT data: no real dataset says whether
+# an asset holds water or how fast it drains. The interface labels them as assumed.
+#
+#   holds_water   true or false
+#   drain_time_h  hours for the asset to drain or dry after it is wetted
+#   water_source  "rain"    filled by rain only
+#                 "watered" kept wet by people watering plants
+#                 "stored"  holds water on purpose or by design
+#   flushable     true if a heavy storm washes it through (drains)
+#   look_for      what an inspector checks, shown on the checklist
+# ----------------------------------------------------------------------------
+[asset_types.park]
+label = "Park"
+holds_water = true
+drain_time_h = 48
+water_source = "rain"
+flushable = false
+look_for = "litter bins, shelter gutters, low spots, tree holes, drain covers"
+
+[asset_types.community_garden]
+label = "Community garden"
+holds_water = true
+drain_time_h = 72
+water_source = "watered"
+flushable = false
+look_for = "pot trays, planters without drainage, watering cans, open containers"
+
+[asset_types.allotment_garden]
+label = "Allotment garden"
+holds_water = true
+drain_time_h = 72
+water_source = "watered"
+flushable = false
+look_for = "plot trays, storage boxes, watering cans, open containers"
+
+[asset_types.therapeutic_garden]
+label = "Therapeutic garden"
+holds_water = true
+drain_time_h = 72
+water_source = "watered"
+flushable = false
+look_for = "raised planters, pot trays, water features"
+
+[asset_types.toilet]
+label = "Park toilet"
+holds_water = true
+drain_time_h = 168
+water_source = "stored"
+flushable = false
+look_for = "floor traps, gully traps, roof gutter, cleaner's pails"
+
+[asset_types.drinking_fountain]
+label = "Drinking fountain"
+holds_water = true
+drain_time_h = 24
+water_source = "watered"
+flushable = false
+look_for = "drip tray, blocked outlet, base surround"
+
+[asset_types.bbq_pit]
+label = "BBQ pit"
+holds_water = true
+drain_time_h = 72
+water_source = "rain"
+flushable = false
+look_for = "pit basin, ash tray, bins nearby"
+
+[asset_types.shelter]
+label = "Park shelter"
+holds_water = true
+drain_time_h = 96
+water_source = "rain"
+flushable = false
+look_for = "roof gutter, downpipe, canvas covers"
+
+[asset_types.campsite]
+label = "Campsite"
+holds_water = true
+drain_time_h = 48
+water_source = "rain"
+flushable = false
+look_for = "ground sheets, bins, wash point"
+
+[asset_types.dog_area]
+label = "Dog run"
+holds_water = true
+drain_time_h = 24
+water_source = "watered"
+flushable = false
+look_for = "water bowls, tap surround"
+
+[asset_types.storm_drain]
+label = "Storm drain"
+holds_water = true
+drain_time_h = 96
+water_source = "rain"
+flushable = true
+look_for = "pooled water, silt and leaf litter, blocked outlets, scupper holes"
+
+[asset_types.planter_box]
+label = "Planter box"
+holds_water = true
+drain_time_h = 24
+water_source = "watered"
+flushable = false
+look_for = "blocked weep holes, water pooling on the soil, saucer underneath"
+
+[asset_types.pot_tray]
+label = "Pot tray"
+holds_water = true
+drain_time_h = 72
+water_source = "watered"
+flushable = false
+look_for = "water in the tray, eggs on the rim"
+
+[asset_types.rain_barrel]
+label = "Rain barrel"
+holds_water = true
+drain_time_h = 720
+water_source = "stored"
+flushable = false
+look_for = "lid or mesh in place and intact, overflow outlet, tap drip tray"
+
+[asset_types.roof_garden]
+label = "Roof garden"
+holds_water = true
+drain_time_h = 48
+water_source = "rain"
+flushable = false
+look_for = "roof outlets, drainage layer inspection points, planter saucers"

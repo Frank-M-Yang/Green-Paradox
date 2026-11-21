@@ -1,0 +1,32 @@
+{
+ "datasetId": "d_31333fa5cf0834f012d840365b336610",
+ "createdAt": "2023-07-31T16:51:30+08:00",
+ "name": "PUB Water Level Sensors",
+ "collectionIds": [
+  "1541"
+ ],
+ "format": "XLSX",
+ "lastUpdatedAt": "2026-04-13T11:52:19+08:00",
+ "managedBy": "PUB, Singapore's national water agency",
+ "datasetSize": 37846,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "Name",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "Description",
+    "description": ""
+   }
+  ]
+ }
+}

@@ -1,0 +1,3 @@
+# Store every file exactly as it is on disk. The site reports its own page weight in bytes,
+# and the cached data files are kept as downloaded, so nothing should be rewritten on commit.
+* -text

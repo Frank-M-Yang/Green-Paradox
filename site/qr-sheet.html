@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:,">
+<title>Canopy Care QR codes</title>
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; color: #0b0b0b; background: #f9f9f7; }
+  .bar { padding: 14px 16px; background: #fcfcfb; border-bottom: 1px solid #e1e0d9; }
+  .bar h1 { font-size: 1.3rem; margin: 0 0 .3rem; }
+  .bar p { margin: .3rem 0; max-width: 78ch; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 8px; }
+  input[type=url], select { font: inherit; padding: 8px 10px; border: 1px solid #c3c2b7; border-radius: 8px; background: #fff; min-height: 40px; }
+  input[type=url] { flex: 1 1 320px; min-width: 0; }
+  button, .btn { font: inherit; font-weight: 600; min-height: 40px; padding: 8px 14px; border-radius: 10px; border: 1px solid #0b0b0b; background: #0b0b0b; color: #fff; cursor: pointer; text-decoration: none; }
+  .btn.alt { background: #fff; color: #0b0b0b; border-color: #c3c2b7; }
+  .warn { background: #fff3d6; border-left: 8px solid #fab219; padding: 8px 12px; }
+  .sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(58mm, 1fr)); gap: 4mm; padding: 6mm; }
+  .label { background: #fff; border: 0.3mm dashed #898781; border-radius: 3mm; padding: 4mm; text-align: center; break-inside: avoid; cursor: pointer; }
+  .label svg { width: 44mm; height: 44mm; display: block; margin: 0 auto 2mm; }
+  .label b { display: block; font-size: 10.5pt; line-height: 1.2; overflow-wrap: anywhere; }
+  .label .ty { font-size: 8.5pt; color: #52514e; }
+  .label .id { font: 8pt ui-monospace, Consolas, monospace; color: #52514e; overflow-wrap: anywhere; }
+  .one .label .id { font-size: 11pt; color: #0b0b0b; }
+  .label .scan { font-size: 8.5pt; margin-top: 1mm; }
+  .sim { display: inline-block; border: 0.4mm solid #0b0b0b; border-radius: 1mm; padding: 0 1.2mm; font-size: 6.5pt; font-weight: 700; letter-spacing: .06em; }
+  .one .sheet { grid-template-columns: 1fr; justify-items: center; }
+  .one .label { width: 100mm; padding: 8mm; cursor: default; }
+  .one .label svg { width: 80mm; height: 80mm; }
+  .one .label b { font-size: 16pt; }
+  .one .label .ty, .one .label .scan { font-size: 11pt; }
+  @media print {
+    body { background: #fff; }
+    .bar { display: none; }
+    .sheet { padding: 0; grid-template-columns: repeat(3, 1fr); }
+    .one .sheet { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <h1>QR codes for the site and for every asset</h1>
+  <p>The first code opens the whole site: show it on a screen or send it to someone. Each of the others opens one asset's inspection checklist. Print this page, cut along the dashed lines and stick a label on the object. Click one label to get a single large one.</p>
+  <p id="note"></p>
+  <div class="row">
+    <label for="base"><b>Site address</b></label>
+    <input id="base" type="url" inputmode="url" spellcheck="false" aria-describedby="note">
+    <select id="which" aria-label="Which assets">
+      <option value="all">The site and all assets</option>
+      <option value="site">The site itself (one code)</option>
+      <option value="sim">Simulated assets only</option>
+      <option value="real">Real locations only</option>
+    </select>
+    <button id="print">Print</button>
+    <a class="btn alt" id="all" href="#" hidden>Show all labels</a>
+    <a class="btn alt" href="index.html">Back to the site</a>
+  </div>
+</div>
+<div class="sheet" id="sheet"></div>
+<script src="data/snapshot.js"></script>
+<script src="qr.js"></script>
+<script>
+(function () {
+  'use strict';
+  var S = window.CANOPY_SNAPSHOT, sheet = document.getElementById('sheet'), base = document.getElementById('base'),
+    which = document.getElementById('which'), note = document.getElementById('note'), only = null;
+  if (!S) { sheet.textContent = 'No snapshot found. Run python scripts/refresh.py first.'; return; }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  var here = location.href.split(/[?#]/)[0].replace(/[^\/]*$/, ''), saved = null;
+  try { saved = localStorage.getItem('canopy-care/qr-base'); } catch (e) { /* not essential */ }
+  base.value = saved || S.meta.public_url || here;
+
+  function draw() {
+    var b = base.value.trim();
+    if (b && b.charAt(b.length - 1) !== '/') b += '/';
+    var local = /^file:/i.test(b) || /\/\/(localhost|127\.0\.0\.1|\[::1\])/i.test(b);
+    note.className = local ? 'warn' : '';
+    note.innerHTML = local
+      ? '<b>These codes will only open on this computer.</b> The address below is a local one, which a phone cannot reach. Host the <code>site</code> folder, or serve it on your network, open this page from that address and the codes will follow. Or type the address the phone will use.'
+      : 'The codes point at the address below. It is taken from where this page was opened, so it is right as long as phones can reach the same address.';
+    var list = S.assets.filter(function (a) { return only ? a.id === only : which.value === 'all' || (which.value !== 'site' && (which.value === 'sim') === a.simulated); });
+    var h = '';
+    // First, one code for the site itself: the thing to put on a slide or send to someone.
+    if (only ? only === 'site' : which.value === 'all' || which.value === 'site') {
+      var home = b + 'index.html', hc;
+      try { hc = window.CanopyQR.svg(home, 200); } catch (e) { hc = '<p>' + esc(e.message) + '</p>'; }
+      h += '<div class="label" data-id="site" title="' + esc(home) + '">' + hc + '<b>' + esc(S.meta.app) + ': the whole site</b>' +
+        '<div class="ty">' + esc(S.meta.neighbourhood) + '. Map, tasks and dashboard</div>' +
+        '<div class="id">' + esc(home) + '</div><div class="scan">Scan to open it on a phone. On a computer, type the address.</div></div>';
+    }
+    list.forEach(function (a) {
+      var url = b + 'index.html#/inspect/' + encodeURIComponent(a.id), code;
+      try { code = window.CanopyQR.svg(url, 200); } catch (e) { code = '<p>' + esc(e.message) + '</p>'; }
+      h += '<div class="label" data-id="' + esc(a.id) + '" title="' + esc(url) + '">' + code + '<b>' + esc(a.name) + '</b>' +
+        '<div class="ty">' + esc(S.types[a.type].label) + (a.simulated ? ' <span class="sim">SIMULATED</span>' : '') + '</div>' +
+        '<div class="id">' + esc(a.id) + '</div><div class="scan">Scan to record an inspection</div></div>';
+    });
+    sheet.innerHTML = h;
+    document.body.className = only ? 'one' : '';
+    document.getElementById('all').hidden = !only;
+  }
+  base.addEventListener('input', function () { try { localStorage.setItem('canopy-care/qr-base', base.value.trim()); } catch (e) { /* not essential */ } draw(); });
+  which.addEventListener('change', draw);
+  sheet.addEventListener('click', function (e) { var l = e.target.closest('.label'); if (l && !only) { only = l.getAttribute('data-id'); draw(); window.scrollTo(0, 0); } });
+  document.getElementById('all').addEventListener('click', function (e) { e.preventDefault(); only = null; draw(); });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+  var m = /[#&]only=([^&]+)/.exec(location.hash);
+  if (m) only = decodeURIComponent(m[1]);
+  draw();
+})();
+</script>
+</body>
+</html>

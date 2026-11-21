@@ -1,0 +1,48 @@
+{
+  "_about": [
+    "SIMULATED INSPECTION HISTORY for the handful of assets the walkthrough in DEMO.md talks about.",
+    "Every other asset gets a repeatable made-up history from scripts/build_snapshot.py.",
+    "days_ago counts back from the snapshot date. All of it is fiction.",
+    "Rule kept throughout: a real place only gets visit dates, each recorded as no standing water. Problems (standing water, larvae) appear on simulated assets only."
+  ],
+  "histories": {
+    "sim-tray-1": [
+      {"days_ago": 9, "standing_water": true, "larvae": true, "actions": ["emptied", "reported"], "note": "Larvae seen. Tray emptied and scrubbed."},
+      {"days_ago": 17, "standing_water": true, "larvae": false, "actions": ["emptied"], "note": "Tray full after watering."},
+      {"days_ago": 26, "standing_water": false, "larvae": false, "actions": [], "note": "Dry."}
+    ],
+    "sim-tray-3": [
+      {"days_ago": 2, "standing_water": true, "larvae": false, "actions": ["reported"], "note": "Could not tip the tray out. Reported for a fix."},
+      {"days_ago": 11, "standing_water": false, "larvae": false, "actions": [], "note": "Dry."}
+    ],
+    "sim-barrel-1": [],
+    "sim-barrel-2": [
+      {"days_ago": 2, "standing_water": false, "larvae": false, "actions": [], "note": "Lid and mesh in place."},
+      {"days_ago": 9, "standing_water": false, "larvae": false, "actions": [], "note": "Lid and mesh in place."},
+      {"days_ago": 16, "standing_water": true, "larvae": false, "actions": ["covered"], "note": "Lid left off. Put back."}
+    ],
+    "sim-planter-3": [
+      {"days_ago": 3, "standing_water": false, "larvae": false, "actions": [], "note": "Drains freely."},
+      {"days_ago": 10, "standing_water": false, "larvae": false, "actions": [], "note": "Drains freely."},
+      {"days_ago": 18, "standing_water": false, "larvae": false, "actions": [], "note": "Drains freely."}
+    ],
+    "sim-drain-1": [
+      {"days_ago": 16, "standing_water": true, "larvae": false, "actions": ["cleared"], "note": "Leaf litter holding water. Cleared."},
+      {"days_ago": 27, "standing_water": true, "larvae": true, "actions": ["cleared", "reported"], "note": "Pooled water in the low section."},
+      {"days_ago": 35, "standing_water": false, "larvae": false, "actions": [], "note": "Dry."}
+    ],
+    "sim-drain-6": [
+      {"days_ago": 4, "standing_water": false, "larvae": false, "actions": [], "note": "Dry."},
+      {"days_ago": 11, "standing_water": false, "larvae": false, "actions": [], "note": "Dry."}
+    ],
+    "sim-roof-1": [
+      {"days_ago": 12, "standing_water": true, "larvae": false, "actions": ["cleared"], "note": "Outlet strainer blocked with leaves."},
+      {"days_ago": 21, "standing_water": false, "larvae": false, "actions": [], "note": "Outlets clear."}
+    ],
+    "pk-na501": [
+      {"days_ago": 2, "standing_water": false, "larvae": false, "actions": [], "note": ""},
+      {"days_ago": 9, "standing_water": false, "larvae": false, "actions": [], "note": ""},
+      {"days_ago": 16, "standing_water": false, "larvae": false, "actions": [], "note": ""}
+    ]
+  }
+}

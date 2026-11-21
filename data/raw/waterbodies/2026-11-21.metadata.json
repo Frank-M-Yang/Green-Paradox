@@ -1,0 +1,63 @@
+{
+ "datasetId": "d_7e2ac2f82f751cea2402c1e3e775f702",
+ "createdAt": "2026-09-21T14:00:04+08:00",
+ "name": "Master Plan 2025 SDCP Waterbody layer",
+ "collectionIds": [],
+ "description": "Indicative polygon of Waterbodies in the Parks and Waterbodies Plan. The Parks and Waterbodies Plan is a Special and Detailed Controls Plan (SDCP) which provides guidelines and controls for specific area of development.",
+ "format": "GEOJSON",
+ "lastUpdatedAt": "2026-10-23T10:07:08+08:00",
+ "managedBy": "Urban Redevelopment Authority",
+ "datasetSize": 6115049,
+ "geoJsonMetadata": {
+  "properties": [
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "OBJECTID",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "PRP_STATUS",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Text",
+     "value": "TEXT"
+    },
+    "attribute": "INC_CRC",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "FMEL_UPD_D",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.AREA",
+    "description": ""
+   },
+   {
+    "dataType": {
+     "label": "Numeric",
+     "value": "NUMERIC"
+    },
+    "attribute": "SHAPE.LEN",
+    "description": ""
+   }
+  ]
+ }
+}
