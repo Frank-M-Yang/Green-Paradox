@@ -53,11 +53,21 @@ Inspection records stay in the browser of the device that made them. Phones and 
 
 Other people can open the site only at a public web address. The address of your own laptop works for devices on the same network and for nobody else.
 
-1. Put the **contents** of the `site` folder on a static host. With GitHub Pages: create a public repository, upload everything inside `site` (the `data` folder included), then under Settings, Pages, choose "Deploy from a branch", `main`, `/ (root)` and save. About a minute later the site is at `https://<user name>.github.io/<repository>/`.
-2. Open that address, go to the Dashboard and press **QR code that opens this site**. Show that code on a screen, or send the address. A phone scans the code. A computer opens the address.
-3. The QR labels for the assets follow the same address: open `qr-sheet.html` there and print.
+**The site is public at <https://frank-m-yang.github.io/Green-Paradox/>.** It is served by GitHub Pages from the `main` branch of <https://github.com/Frank-M-Yang/Green-Paradox>. That address forwards to `site/`, where the site itself lives.
 
-Before you publish, decide whether the organisation names of the community gardens should be public next to made-up inspection dates. `show_garden_names = false` in `config/demo_config.toml` hides them. Every visitor's inspection records stay in their own browser, so nobody can change what another visitor sees. After a data refresh, upload `data/snapshot.js` and `task-sheet.html` again.
+- **To share it:** open that address, go to the Dashboard and press **QR code that opens this site**. Show the code on a screen, or send the address. A phone scans the code. A computer opens the address.
+- **The QR labels for the assets** follow the same address: open `site/qr-sheet.html` there and print.
+- **To update what the public sees:** refresh the data or change the files, then commit and push. The public site follows about a minute later.
+
+  ```
+  git add -A
+  git commit -m "Refresh the snapshot"
+  git push
+  ```
+
+- **Visitors cannot change anything for anyone else.** Each visitor's inspection records stay in their own browser.
+- **Organisation names of community gardens are hidden** in the public build (see "Changing things" below).
+- To host it somewhere else instead, copy the contents of the `site` folder to any static host. Nothing needs configuring.
 
 ### Running it every day
 

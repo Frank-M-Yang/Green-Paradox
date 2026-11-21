@@ -12,13 +12,13 @@ The first asset you open is a **real** place, and you say out loud that the insp
    python scripts/refresh.py --as-of 2026-11-21 --offline
    ```
 
-2. Make the site reachable from the phone. Host the `site` folder, or serve the project folder from the laptop and join the phone to the laptop's hotspot:
+2. Make the site reachable from the phone. It is public at <https://frank-m-yang.github.io/Green-Paradox/>, which shows whatever was last pushed to GitHub. If the venue's network is not to be trusted, serve the project folder from the laptop instead and join the phone to the laptop's hotspot:
 
    ```
    python -m http.server 8000 --bind 0.0.0.0
    ```
 
-3. On the laptop, open the site **at that address** (not from the file), so the laptop and the QR code agree.
+3. On the laptop, open the site **at the address the phone will use** (not from the file), so the laptop and the QR code agree.
 4. Open `qr-sheet.html` at the same address, click the label **Pot tray A**, print it, and stick it on a real plant saucer. Scan it once with the phone to be sure it opens the checklist.
 5. On both the laptop and the phone: Dashboard, then **Delete records on this device**. Otherwise yesterday's rehearsal is still in the list.
 6. Leave the laptop on the **Map** screen with **Rainfall** set to "Real: last 14 days" and the day marker at the right-hand end. Have `task-sheet.html` printed, or open in a second tab.

@@ -131,6 +131,7 @@ Added with the visual redesign of 21 Nov 2026:
 22. **Rain gauges are labelled with their ID only.** The key explains the triangle.
 23. **A link can open the map on a given day** (`#/map/<asset id>/<day>`). Dragging the day marker does not change the address.
 24. **The QR sheet starts with one code for the site itself**, reached from the Dashboard as "QR code that opens this site". It carries whatever address the page was opened from, like the asset labels, and warns when that address is a local one.
+25. **The whole project is in one public GitHub repository**, `Frank-M-Yang/Green-Paradox`, created on 21 Nov 2026 at your request, and GitHub Pages serves it from the `main` branch at <https://frank-m-yang.github.io/Green-Paradox/>. I put the whole project there and not only the `site` folder, because you asked for teammates to be added and they will need the scripts and the data cache. So the cached downloads in `data/raw/` are public too: 27 MB of files from data.gov.sg, under the Singapore Open Data Licence, with the attribution in README.md. A page at the top forwards to `site/`. `.nojekyll` stops GitHub from rewriting any file, and `.gitattributes` keeps every byte as it is on disk.
 
 ## Known limitations
 
