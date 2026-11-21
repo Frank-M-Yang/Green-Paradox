@@ -1,0 +1,23 @@
+# Decisions
+
+One short entry per decision. **Status** is one of: Agreed (with the coach or in the brief), Provisional (a default from the brief, not yet confirmed), Proposed (suggested here, waiting for a yes).
+
+| # | Decision | Why | Status |
+|---|---|---|---|
+| 1 | **Move from a static site to a web app with Supabase.** Next.js, a REST API and a shared database replace the static site and daily script | Tasks must be shared: one person claims, everyone sees it. The static site kept records in each browser, and its own notes named shared storage as the first thing to add. Cost: it needs a network, hence 12 | Agreed |
+| 2 | **Simulated data, not real datasets** | The centre is now the task flow, not the map. No open dataset lists ponds or solar systems, so they would be invented either way. Events can be triggered on stage. Made-up problems are not pinned on real places. Cost: less "real data" credibility. `legacy/` still shows the real-data version | Agreed |
+| 3 | **Scoring by rules, not a trained model** | A user must see which factors produced a level. There are no inspection outcomes to train on. An expert can review thresholds one line at a time | Agreed |
+| 4 | **User and Repairer are one role** | In a neighbourhood team the person who notices a problem is often the one who fixes it. One role means fewer screens and fewer permission rules. Cost: nobody is independent by default, hence the rule in 8 | Agreed |
+| 5 | **Three asset types: gardens, ponds, solar systems** | Agreed scope. Note: the flushing research is about drains, and none of the three is a drain. See 10 | Agreed |
+| 6 | **The browser talks only to our REST API, and only the API writes to Supabase** | The brief names the REST API as the interface. Permission checks and rules sit in one place. The data store can be swapped for the fallback. Row-level security stays on as a second lock | Proposed |
+| 7 | **Users claim tasks from a shared list. Admin does not assign** | No dispatcher is needed, which suits one role. A claim is atomic, so work is not duplicated. Addition: the claimer can release a task | Provisional |
+| 8 | **Task states: open, claimed, done, verified. Risk falls at done** | Risk should reflect the work as soon as it is recorded. Verification is by a different user or an Admin. It is the first thing to cut if time is short | Provisional |
+| 9 | **Solar hazards: nesting under panels, water pooling in mounts and trays, cable damage** | Covers the biological and the practical. Limit: for cable damage the only action offered is "report". The app never suggests electrical work | Provisional |
+| 10 | **Each grid cell carries event intensity, and an event changes risk by asset type. It does not always raise it** | The brief's default says an event raises risk. The research we carry over says a heavy storm lowers it for a while where water is flushed away. We apply that to gardens, treating their drains as part of them, and to nothing else | Provisional, with this change proposed |
+| 11 | **Event simulator in the Admin area, with a demo clock** | The presenter needs to trigger rain and floods. Risk also depends on days passing, so the same panel advances time: "three days later" in one click | Provisional, clock proposed |
+| 12 | **Network fallback in three layers:** the same app on seeded in-memory data, a map that works without tiles, and a recording plus `legacy/` | Supabase and tiles both need a connection. The in-memory store also lets the team build screens before the database exists | Proposed |
+| 13 | **Leaflet with OpenStreetMap tiles** | Small and simple, enough for a grid and markers. The tiles are free with attribution but may not be bulk-downloaded, so offline uses the tile-less map and not saved tiles | Proposed |
+| 14 | **Risk is recomputed when something changes and on each tick, then stored on the asset with its factors** | Map and lists read fast. The explanation is saved with the number it explains | Proposed |
+| 15 | **No disease data in the model** | The first version used real dengue clusters. Here all data is simulated, and simulating disease would mean inventing outbreaks. The model covers standing water, pests and damage only | Proposed |
+| 16 | **Seeded fictional accounts. No public sign-up** | The brief allows fictional people and accounts only. A real e-mail address would be personal data | Proposed |
+| 17 | **The first version stays in `legacy/`** and stays public at the same address | It can be shown if asked. Links and QR codes made before the move still open | Done locally, not yet pushed |
