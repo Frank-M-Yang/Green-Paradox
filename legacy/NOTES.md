@@ -1,5 +1,7 @@
 # Notes
 
+> These notes describe the first version, the Canopy Care static site, which now lives in `legacy/`. Paths below are relative to that folder. The team's current work is described by the documents at the top of the repository.
+
 What is real, what is not, how heavy the page is, what does not work yet, and what to do next. Written for the snapshot of 21 Nov 2026.
 
 ## The one thing to know first
@@ -98,7 +100,7 @@ Everything `index.html` loads, uncompressed: **253 KB**. Before the visual redes
 - A web host that compresses text would send about 61 KB (44 KB before).
 - After loading, the page makes no network requests at all. Switching screens, scenarios and days happens in the browser.
 - The two printable pages are separate and are loaded only when opened: the task sheet (25 KB, no script) and the QR sheet.
-- The data script runs once a day and then nothing runs. A normal day's refresh made 18 requests, received 62 KB and took 31 seconds (measured on 21 Nov 2026 with the cache in place, before the replay was added; the replay adds nothing to a normal day, because the earlier days it reads are already cached). A first run from an empty cache made 573 requests, received 26 MB and took 20 minutes when it needed 45 days of rain. **It now needs 84 days, so expect about 35 minutes. That is an estimate from the rate limit: the clean start has not been run again.** Most of the bytes are five large map and facility files that are fetched again only weekly or monthly, and most of the time is the public rate limit on rainfall requests.
+- The data script runs once a day and then nothing runs. A normal day's refresh made 18 requests, received 62 KB and took 31 seconds (measured on 21 Nov 2026 with the cache in place, before the replay was added; the replay adds nothing to a normal day, because the earlier days it reads are already cached). A first run from an empty cache now needs 84 days of rain and took 36 minutes: 1,040 requests, 27.5 MB received, nothing failed (measured on 21 Nov 2026 in a copy of the project with an empty `data/raw/`). Before the replay was added it needed 45 days and took 20 minutes. Most of the bytes are five large map and facility files that are fetched again only weekly or monthly, and most of the time is the public rate limit on rainfall requests.
 
 ## Decisions I made without asking
 
@@ -166,6 +168,8 @@ Checked on 21 Nov 2026, after the visual redesign:
 - **All five screens open straight from the folder** in headless Microsoft Edge at 1366 wide, and the map also at 500 wide.
 - **Colours.** The five-step scale passes the validator's checks for an ordered scale on the map's main ground: one hue, lightness falling at every step, palest step at 2.1:1. On park green and on tinted ground the palest step falls under 2:1, which is why it has a dark edge. On a screenshot with deuteranopia, protanopia and tritanopia simulated, the steps stay in order and stay apart from the clusters.
 - **Reduced motion.** With the setting forced on, the page renders the same. The code that skips the glide, the pulse and the smooth scroll was read, not exercised.
+- **Clean start, with the replay.** In a copy of the project with an empty cache, `python scripts/refresh.py` fetched all 14 sources and 84 days of rainfall in 36 minutes: 1,040 requests, none failed, no warnings. Every score, every day of every replay, every map layer and all the rainfall it produced were identical to the published build.
+- **The public site.** The eight page files served at <https://frank-m-yang.github.io/Green-Paradox/> were byte-for-byte the local ones, and an independent reader decoded the site's QR code to that address.
 
 Checked earlier the same day, before the redesign, and not repeated since:
 
@@ -179,7 +183,6 @@ Checked earlier the same day, before the redesign, and not repeated since:
 
 Not checked:
 
-- **The clean start since the replay was added.** It now downloads 84 days of rain instead of 45. Only the 8 new days were fetched, with no failures.
 - **The new map in Firefox or Safari.** The day marker is a restyled slider, and each browser styles sliders its own way. It carries rules for both families, but only Chromium was run.
 - **Dragging the day marker with a finger, and the new map on a real phone.** The phone size was checked in a desktop browser's phone view only.
 - **The new palette on a projector.** Contrast was measured, not looked at on one.

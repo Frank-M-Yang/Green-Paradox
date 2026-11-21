@@ -1,4 +1,6 @@
-# Canopy Care
+# Canopy Care (legacy)
+
+> **This is the first version of the project, kept for reference.** On 21 Nov 2026 the team changed direction to a task system with a shared backend, The Green Paradox, described by the documents at the top of the repository. Nothing here is being developed further. It still runs: use this folder, `legacy/`, as the project folder for every command below.
 
 A management system for the green and water-holding assets of one neighbourhood. It keeps a register of assets, works out once a day which ones most need an inspection for standing water, and records what inspectors find.
 
@@ -28,7 +30,7 @@ It fetches what is new, computes the priorities, writes `site/data/snapshot.js` 
 |---|---|
 | `python scripts/refresh.py --offline` | Rebuilds from `data/raw/` without touching the network. |
 | `python scripts/refresh.py --as-of 2026-11-21 --offline` | Rebuilds the snapshot for one past day exactly. **Use this before the demo**: [DEMO.md](DEMO.md) is written for 21 Nov 2026. |
-| `python scripts/refresh.py --force` | Downloads every source again. From an empty cache this takes about 35 minutes (estimated, see NOTES.md), because the public rate limit allows one rainfall request every two seconds and the day-by-day replay needs 84 days of rain. |
+| `python scripts/refresh.py --force` | Downloads every source again. From an empty cache this takes about 36 minutes, because the public rate limit allows one rainfall request every two seconds and the day-by-day replay needs 84 days of rain. |
 
 On macOS or Linux the command may be `python3`.
 
@@ -53,10 +55,10 @@ Inspection records stay in the browser of the device that made them. Phones and 
 
 Other people can open the site only at a public web address. The address of your own laptop works for devices on the same network and for nobody else.
 
-**The site is public at <https://frank-m-yang.github.io/Green-Paradox/>.** It is served by GitHub Pages from the `main` branch of <https://github.com/Frank-M-Yang/Green-Paradox>. That address forwards to `site/`, where the site itself lives.
+**The site is public at <https://frank-m-yang.github.io/Green-Paradox/legacy/site/>.** It is served by GitHub Pages from the `main` branch of <https://github.com/Frank-M-Yang/Green-Paradox>. The shorter address <https://frank-m-yang.github.io/Green-Paradox/> forwards there, and so does the address it had before it moved into `legacy/` (`.../Green-Paradox/site/index.html`), so links and QR codes made before the move still open.
 
 - **To share it:** open that address, go to the Dashboard and press **QR code that opens this site**. Show the code on a screen, or send the address. A phone scans the code. A computer opens the address.
-- **The QR labels for the assets** follow the same address: open `site/qr-sheet.html` there and print.
+- **The QR labels for the assets** follow the same address: open `qr-sheet.html` there and print.
 - **To update what the public sees:** refresh the data or change the files, then commit and push. The public site follows about a minute later.
 
   ```

@@ -1,4 +1,12 @@
 __pycache__/
 *.pyc
-data/raw/manifest.json.tmp
+legacy/data/raw/manifest.json.tmp
 .claude/
+
+# Office lock files
+~$*
+
+# Secrets and local settings for the new app. Never commit keys.
+.env
+.env.*
+!.env.example

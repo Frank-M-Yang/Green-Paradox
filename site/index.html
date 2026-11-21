@@ -3,35 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
-<link rel="icon" href="data:,">
-<title>Canopy Care</title>
-<link rel="stylesheet" href="style.css">
+<title>Canopy Care has moved</title>
+<!-- The static site moved to legacy/site on 21 Nov 2026. Links and QR codes printed before
+     then point here, some with an asset after the "#", so this page forwards them whole. -->
+<script>location.replace('../legacy/site/index.html' + location.search + location.hash);</script>
 </head>
 <body>
-<header class="top">
-  <div class="brand">
-    <a href="#/map" class="name">Canopy Care</a>
-    <span class="place" id="place"></span>
-  </div>
-  <label class="scen">
-    <span>Rainfall</span>
-    <select id="scenario" aria-label="Rainfall scenario"></select>
-  </label>
-  <nav aria-label="Screens">
-    <a href="#/map" data-tab="map">Map</a>
-    <a href="#/tasks" data-tab="tasks">Tasks</a>
-    <a href="#/dashboard" data-tab="dashboard">Dashboard</a>
-    <a href="#/scenario" data-tab="scenario">Scenarios</a>
-  </nav>
-</header>
-<p class="caveat" id="caveat"></p>
-<p class="replay" id="replay" hidden></p>
-<main id="view" tabindex="-1"></main>
-<footer class="foot" id="foot"></footer>
-<noscript><p style="padding:1rem">Canopy Care needs JavaScript to show the map and task list. The printable <a href="task-sheet.html">daily task sheet</a> works without it.</p></noscript>
-<script src="data/snapshot.js"></script>
-<script src="qr.js"></script>
-<script src="app.js"></script>
+<p>This page has moved to <a href="../legacy/site/index.html">legacy/site</a>.</p>
 </body>
 </html>
